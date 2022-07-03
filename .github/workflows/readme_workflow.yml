@@ -1,8 +1,14 @@
-name: Example github action
+name: readme commit svg
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  publish-commit-artifact:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "おはよございます"
+      - name: commit-svg
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics.plugin.isocalendar.fullyear.svg
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
+
       
