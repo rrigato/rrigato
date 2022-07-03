@@ -1,10 +1,10 @@
 name: readme commit svg
 on: 
   push: 
-    branches:
-      - master
-  schedule:
-    - '0 0 * * *'
+  #   branches:
+  #     - master
+  # schedule:
+  #   - '0 0 * * *'
 jobs:
   publish-commit-artifact:
     runs-on: ubuntu-latest
