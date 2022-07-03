@@ -1,6 +1,8 @@
 name: readme commit svg
 on: 
   push: 
+    branches:
+      - master
   schedule:
     - '0 0 * * *'
 jobs:
