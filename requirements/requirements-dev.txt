@@ -1,0 +1,2 @@
+detect-secrets==1.2.0
+-r requirements-prod.txt
