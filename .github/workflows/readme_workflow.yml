@@ -1,5 +1,8 @@
 name: readme commit svg
-on: [push]
+on: 
+  push:
+  schedule:
+    - cron '0 0 * * *'
 jobs:
   publish-commit-artifact:
     runs-on: ubuntu-latest
@@ -7,8 +10,8 @@ jobs:
       - name: commit-svg
         uses: lowlighter/metrics@latest
         with:
-          filename: metrics.plugin.isocalendar.fullyear.svg
+          filename: commit_calendar.svg
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
-
+          token: ${{secrets.COMMIT_METRICS_SECRET}}
       
