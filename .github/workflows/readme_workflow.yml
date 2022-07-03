@@ -19,5 +19,11 @@ jobs:
           plugin_isocalendar_duration: full-year
           token: ${{secrets.COMMIT_METRICS_SECRET}}
 
-      - name: check-aws-cli
-        run: echo "$(aws --version)"
+      - name: check-artifact-location
+        shell: bash
+        run: |
+          echo "$(aws --version)"
+          ls
+          cd metrics_renders
+          ls
+      
