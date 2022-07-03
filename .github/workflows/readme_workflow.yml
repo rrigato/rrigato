@@ -25,5 +25,5 @@ jobs:
           echo "$(aws --version)"
           ls -l
           cd /metrics_renders
-          ls
+          ls -l
       
