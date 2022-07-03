@@ -4,7 +4,8 @@ on:
   #   branches:
   #     - master
   # schedule:
-  #   - '0 0 * * *'
+  #   # * is a special character in YAML so you have to quote this string
+  #   - cron:  '30 5,17 * * *'
 jobs:
   publish-commit-artifact:
     runs-on: ubuntu-latest
@@ -13,7 +14,10 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           filename: commit_calendar.svg
+          output_action: none
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
           token: ${{secrets.COMMIT_METRICS_SECRET}}
-      
+
+      - name: check-aws-cli
+        run: echo "$(aws --version)"
