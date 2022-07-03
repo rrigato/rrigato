@@ -1,8 +1,8 @@
 name: readme commit svg
 on: 
-  push:
+  push: 
   schedule:
-    - cron '0 0 * * *'
+    - '0 0 * * *'
 jobs:
   publish-commit-artifact:
     runs-on: ubuntu-latest
