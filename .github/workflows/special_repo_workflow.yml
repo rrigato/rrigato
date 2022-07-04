@@ -33,11 +33,13 @@ jobs:
       - name: persist-commit-artifact
         shell: bash
         env: 
+          ARTIFACT_LOCAL_PATH: '/metrics_renders/'
           AWS_ACCESS_KEY_ID: ${{secrets.PERSISTANT_STORAGE_ID}}
           AWS_DEFAULT_OUTPUT: json
           AWS_DEFAULT_REGION: 'us-east-1'
           AWS_S3_BUCKET_NAME: 'ryanrigato.com'
-          AWS_S3_KEY_PREFIX: 'github/'
+          AWS_S3_UPLOAD_PREFIX: 'github/${{env.COMMIT_CALENDAR_FILE}}'
           AWS_SECRET_ACCESS_KEY: ${{secrets.PERSISTANT_STORAGE_KEY}}
+          COMMIT_CALENDAR_PATH: '${{env.ARTIFACT_LOCAL_PATH}}${{env.COMMIT_CALENDAR_FILE}}'
         run: ${{env.ORCHESTRATION_SCRIPT}}
 
