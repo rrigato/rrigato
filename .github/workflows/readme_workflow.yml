@@ -5,24 +5,25 @@ on:
   #     - master
   # schedule:
   #   # * is a special character in YAML so you have to quote this string
-  #   - cron:  '30 5,17 * * *'
+  #   - cron:  '0 15 * * *'
 jobs:
   publish-commit-artifact:
     runs-on: ubuntu-latest
     env: 
       COMMIT_CALENDAR_NAME: commit_calendar.svg
     steps:
-      - name: create-svg
-        uses: lowlighter/metrics@latest
-        with:
-          filename: ${{ env.COMMIT_CALENDAR_NAME }}
-          output_action: none
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
-          # 
-          token: ${{secrets.COMMIT_METRICS_SECRET}}
+      # - name: create-svg
+      #   uses: lowlighter/metrics@latest
+      #   with:
+      #     filename: ${{ env.COMMIT_CALENDAR_NAME }}
+      #     output_action: none
+      #     plugin_isocalendar: yes
+      #     plugin_isocalendar_duration: full-year
+      #     # 
+      #     token: ${{secrets.COMMIT_METRICS_SECRET}}
 
       - name: check-artifact-location
+        uses: actions/checkout@v3
         shell: bash
         env: 
           AWS_ACCESS_KEY_ID: ${{secrets.PERSISTANT_STORAGE_ID}}
