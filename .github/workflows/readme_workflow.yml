@@ -21,9 +21,10 @@ jobs:
       #     plugin_isocalendar_duration: full-year
       #     # 
       #     token: ${{secrets.COMMIT_METRICS_SECRET}}
-
-      - name: check-artifact-location
+      - name: checkout-current-branch
         uses: actions/checkout@v3
+        
+      - name: check-artifact-location
         shell: bash
         env: 
           AWS_ACCESS_KEY_ID: ${{secrets.PERSISTANT_STORAGE_ID}}
