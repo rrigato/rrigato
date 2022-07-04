@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 aws --version
 env
 aws sts get-caller-identity
