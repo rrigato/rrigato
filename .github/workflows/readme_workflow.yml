@@ -17,12 +17,17 @@ jobs:
           output_action: none
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
+          # 
           token: ${{secrets.COMMIT_METRICS_SECRET}}
 
       - name: check-artifact-location
         shell: bash
+        env: 
+          AWS_ACCESS_KEY_ID: ${{secrets.PERSISTANT_STORAGE_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.PERSISTANT_STORAGE_KEY}}
         run: |
-          echo "$(aws --version)"
+          export 
+          aws sts get-caller-identity
           ls -l
           cd /metrics_renders
           ls -l
