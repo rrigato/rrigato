@@ -10,25 +10,27 @@ jobs:
   publish-commit-artifact:
     runs-on: ubuntu-latest
     env: 
-      COMMIT_CALENDAR_NAME: commit_calendar.svg
+      COMMIT_CALENDAR_FILE: commit_calendar.svg
       ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
+
     steps:
       - name: create-svg
         uses: lowlighter/metrics@latest
         with:
-          filename: ${{ env.COMMIT_CALENDAR_NAME }}
+          filename: ${{ env.COMMIT_CALENDAR_FILE }}
           output_action: none
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
-          # 
+          # https://github.com/lowlighter/metrics/blob/master/.github/readme/partials/documentation/setup/action.md
           token: ${{secrets.COMMIT_METRICS_SECRET}}
+
       - name: checkout-current-branch
         uses: actions/checkout@v3
 
       - name: script-execution-permissions
         run: chmod +x ${{env.ORCHESTRATION_SCRIPT}}
 
-      - name: check-artifact-location
+      - name: persist-commit-artifact
         shell: bash
         env: 
           AWS_ACCESS_KEY_ID: ${{secrets.PERSISTANT_STORAGE_ID}}
