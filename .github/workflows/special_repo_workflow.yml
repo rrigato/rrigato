@@ -13,28 +13,29 @@ jobs:
       COMMIT_CALENDAR_NAME: commit_calendar.svg
       ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
     steps:
-      # - name: create-svg
-      #   uses: lowlighter/metrics@latest
-      #   with:
-      #     filename: ${{ env.COMMIT_CALENDAR_NAME }}
-      #     output_action: none
-      #     plugin_isocalendar: yes
-      #     plugin_isocalendar_duration: full-year
-      #     # 
-      #     token: ${{secrets.COMMIT_METRICS_SECRET}}
+      - name: create-svg
+        uses: lowlighter/metrics@latest
+        with:
+          filename: ${{ env.COMMIT_CALENDAR_NAME }}
+          output_action: none
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
+          # 
+          token: ${{secrets.COMMIT_METRICS_SECRET}}
       - name: checkout-current-branch
         uses: actions/checkout@v3
 
-      - name: script-permissions
+      - name: script-execution-permissions
         run: chmod +x ${{env.ORCHESTRATION_SCRIPT}}
+
       - name: check-artifact-location
         shell: bash
         env: 
           AWS_ACCESS_KEY_ID: ${{secrets.PERSISTANT_STORAGE_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.PERSISTANT_STORAGE_KEY}}
+          AWS_DEFAULT_OUTPUT: json
+          AWS_DEFAULT_REGION: 'us-east-1'
           AWS_S3_BUCKET_NAME: 'ryanrigato.com'
           AWS_S3_KEY_PREFIX: 'github/'
-          # AWS_DEFAULT_OUTPUT: json
-          AWS_DEFAULT_REGION: 'us-east-1'
+          AWS_SECRET_ACCESS_KEY: ${{secrets.PERSISTANT_STORAGE_KEY}}
         run: ${{env.ORCHESTRATION_SCRIPT}}
 
