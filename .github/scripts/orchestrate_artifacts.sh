@@ -4,7 +4,7 @@
 
 aws --version
 
-echo "$(aws sts get-caller-identity)"
+aws sts get-caller-identity
 #   aws s3api put-object --bucket $AWS_S3_BUCKET_NAME \
 #   --key "${AWS_S3_KEY_PREFIX}/" --body my_images.tar.bz2
 

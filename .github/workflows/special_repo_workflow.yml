@@ -34,5 +34,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.PERSISTANT_STORAGE_KEY}}
           AWS_S3_BUCKET_NAME: 'ryanrigato.com'
           AWS_S3_KEY_PREFIX: 'github/'
+          # AWS_DEFAULT_OUTPUT: json
+          AWS_DEFAULT_REGION: 'us-east-1'
         run: ${{env.ORCHESTRATION_SCRIPT}}
 
