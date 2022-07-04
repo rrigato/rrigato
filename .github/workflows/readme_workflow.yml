@@ -9,11 +9,13 @@ on:
 jobs:
   publish-commit-artifact:
     runs-on: ubuntu-latest
+    env: 
+      COMMIT_CALENDAR_NAME: commit_calendar.svg
     steps:
       - name: create-svg
         uses: lowlighter/metrics@latest
         with:
-          filename: commit_calendar.svg
+          filename: ${{ env.COMMIT_CALENDAR_NAME }}
           output_action: none
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
@@ -27,5 +29,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.PERSISTANT_STORAGE_KEY}}
           AWS_S3_BUCKET_NAME: 'ryanrigato.com'
           AWS_S3_KEY_PREFIX: 'github/'
-        run: ./scripts/orchestrate_artifacts.sh
+        run: ./.github/scripts/orchestrate_artifacts.sh
 
