@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       COMMIT_CALENDAR_NAME: commit_calendar.svg
+      ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
     steps:
       # - name: create-svg
       #   uses: lowlighter/metrics@latest
@@ -23,7 +24,9 @@ jobs:
       #     token: ${{secrets.COMMIT_METRICS_SECRET}}
       - name: checkout-current-branch
         uses: actions/checkout@v3
-        
+
+      - name: script-permissions
+        run: chmod +x ${{env.ORCHESTRATION_SCRIPT}}
       - name: check-artifact-location
         shell: bash
         env: 
@@ -31,5 +34,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.PERSISTANT_STORAGE_KEY}}
           AWS_S3_BUCKET_NAME: 'ryanrigato.com'
           AWS_S3_KEY_PREFIX: 'github/'
-        run: ./.github/scripts/orchestrate_artifacts.sh
+        run: ${{env.ORCHESTRATION_SCRIPT}}
 
