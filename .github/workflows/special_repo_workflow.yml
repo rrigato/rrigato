@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       COMMIT_CALENDAR_NAME: commit_calendar.svg
-      ORCHESTRATION_SCRIPT: './scripts/orchestrate_artifacts.sh'
+      ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
     steps:
       # - name: create-svg
       #   uses: lowlighter/metrics@latest
