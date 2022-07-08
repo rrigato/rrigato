@@ -1,11 +1,11 @@
 name: readme svg for special repo
 on: 
   push: 
-  #   branches:
-  #     - master
-  # schedule:
-  #   # * is a special character in YAML so you have to quote this string
-  #   - cron:  '0 15 * * *'
+    branches:
+      - master
+  schedule:
+    #every day at 3 pm utc
+    - cron:  '0 15 * * *'
 jobs:
   publish-commit-artifact:
     runs-on: ubuntu-latest
