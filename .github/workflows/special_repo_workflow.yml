@@ -4,8 +4,8 @@ on:
     branches:
       - master
   schedule:
-    #every day at 3 pm utc
-    - cron:  '0 15 * * *'
+    #every day at 8 pm utc
+    - cron:  '0 20 * * *'
 jobs:
   publish-commit-artifact:
     runs-on: ubuntu-latest
