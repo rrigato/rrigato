@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       COMMIT_CALENDAR_FILE: commit_calendar.svg
+      LANGUAGES_FILE: programming_languages.svg
       ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
 
     steps:
@@ -24,12 +25,14 @@ jobs:
           plugin_isocalendar_duration: full-year
           # https://github.com/lowlighter/metrics/blob/master/.github/readme/partials/documentation/setup/action.md
           token: ${{secrets.COMMIT_METRICS_SECRET}}
+
       - name: create-svg-languages
         uses: lowlighter/metrics@latest
         with:
-          filename: 'sample_file.svg'
-          # filename: ${{ env.LANGUAGES_FILE }}
+          filename: ${{ env.LANGUAGES_FILE }}
           plugin_languages: yes
+          token: ${{secrets.COMMIT_METRICS_SECRET}}
+
       - name: checkout-current-branch
         uses: actions/checkout@v3
 
