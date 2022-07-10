@@ -30,6 +30,7 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           filename: ${{ env.LANGUAGES_FILE }}
+          output_action: none
           plugin_languages: yes
           token: ${{secrets.COMMIT_METRICS_SECRET}}
 
@@ -46,7 +47,7 @@ jobs:
           AWS_DEFAULT_OUTPUT: json
           AWS_DEFAULT_REGION: 'us-east-1'
           AWS_S3_BUCKET_NAME: 'ryanrigato.com'
-          AWS_S3_UPLOAD_PREFIX: 'github/${{env.COMMIT_CALENDAR_FILE}}'
+          AWS_S3_UPLOAD_PREFIX: 'github/'
           AWS_SECRET_ACCESS_KEY: ${{secrets.PERSISTANT_STORAGE_KEY}}
         run: ${{env.ORCHESTRATION_SCRIPT}}
 
