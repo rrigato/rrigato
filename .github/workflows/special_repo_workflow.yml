@@ -3,6 +3,7 @@ on:
   push: 
     branches:
       - master
+      - dev
   schedule:
     #every day at 8 pm utc
     - cron:  '0 20 * * *'
@@ -14,7 +15,7 @@ jobs:
       ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
 
     steps:
-      - name: create-svg
+      - name: create-svg-commits
         uses: lowlighter/metrics@latest
         with:
           filename: ${{ env.COMMIT_CALENDAR_FILE }}
@@ -23,7 +24,12 @@ jobs:
           plugin_isocalendar_duration: full-year
           # https://github.com/lowlighter/metrics/blob/master/.github/readme/partials/documentation/setup/action.md
           token: ${{secrets.COMMIT_METRICS_SECRET}}
-
+      - name: create-svg-languages
+        uses: lowlighter/metrics@latest
+        with:
+          filename: 'sample_file.svg'
+          # filename: ${{ env.LANGUAGES_FILE }}
+          plugin_languages: yes
       - name: checkout-current-branch
         uses: actions/checkout@v3
 
