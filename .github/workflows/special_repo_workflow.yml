@@ -40,7 +40,7 @@ jobs:
       - name: script-execution-permissions
         run: chmod +x ${{env.ORCHESTRATION_SCRIPT}}
 
-      - name: persist-commit-artifact
+      - name: persist-image-artifacts
         shell: bash
         env: 
           AWS_ACCESS_KEY_ID: ${{secrets.PERSISTANT_STORAGE_ID}}
