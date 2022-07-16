@@ -1,3 +1,2 @@
-![commit_calendar.svg](https://ryanrigato.com/github/commit_calendar.svg)
-
-![programming_languages.svg](https://ryanrigato.com/github/programming_languages.svg)
+[<img align="left" width="400" src="https://ryanrigato.com/github/commit_calendar.svg">](#)
+[<img align="right" width="151" src="https://ryanrigato.com/github/programming_languages.svg">](#)
