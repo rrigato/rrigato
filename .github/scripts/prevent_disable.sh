@@ -6,7 +6,7 @@ git tag
 
 git status
 
-echo "---current status---"
+echo $current_tags
 echo ${current_tags#*remove}
 
 if [ $(date +%d) = "18" ]; then
