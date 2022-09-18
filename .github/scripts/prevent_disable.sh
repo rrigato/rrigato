@@ -24,6 +24,8 @@ echo "tag_message - ${tag_message}"
 
 if [ $(date +%d) = "18" ]; then
     echo "adding unnecessary tag"
+    git tag $new_tag -m $tag_message
+    echo "tag addition complete"
 fi
 
 git tag
