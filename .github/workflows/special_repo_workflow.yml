@@ -14,6 +14,7 @@ jobs:
       COMMIT_CALENDAR_FILE: commit_calendar.svg
       LANGUAGES_FILE: programming_languages.svg
       ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
+      PREVENT_DISABLE_SCRIPT: '.github/scripts/prevent_disable.sh'
 
     steps:
       - name: create-svg-commits
@@ -52,4 +53,11 @@ jobs:
           AWS_S3_UPLOAD_PREFIX: 'github/'
           AWS_SECRET_ACCESS_KEY: ${{secrets.PERSISTANT_STORAGE_KEY}}
         run: ${{env.ORCHESTRATION_SCRIPT}}
+
+      - name: script-execution-permissions-disable
+        run: chmod +x ${{env.PREVENT_DISABLE_SCRIPT}}
+
+      - name: prevent-disabled-workflow
+        shell: bash
+        run: ${{env.PREVENT_DISABLE_SCRIPT}}
 
