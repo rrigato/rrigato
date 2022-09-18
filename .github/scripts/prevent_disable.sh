@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#setup git config
+git config user.name "github_action_bot"
+git config user.email "no_email_address"
+
 #puts the static string replace where the second . is
 # example
 # v1.1.0 -> v1.1replace0
