@@ -7,12 +7,17 @@ current_tag=$(git tag | tail -1 | sed 's/\./replace/2')
 echo "current_tag - ${current_tag}"
 echo "current_minor_version - ${current_tag##*replace}"
 
+# takes everything after the string 'replace' and adds 1
+# v1.1replace0 -> 1
 new_minor_version=$((${current_tag##*replace} + 1))
 echo "new_minor_version - ${new_minor_version}"
 
+# takes everything before the string 'replace'
+# v1.1replace0 -> v1.1
 tag_without_minor_version="${current_tag%replace*}."
 echo "tag_without_minor_version - ${tag_without_minor_version}"
 
+#concatenates new tag
 new_tag=${tag_without_minor_version}${new_minor_version}
 echo "new_tag - ${new_tag}"
 
@@ -21,7 +26,7 @@ tag_message="prevent_disable - ${tag_without_minor_version}${new_minor_version}"
 echo "tag_message - ${tag_message}"
 
 
-
+# only add a tag on the 18th day of the month
 if [ $(date +%d) = "18" ]; then
     echo "adding unnecessary tag"
     git tag $new_tag -m $tag_message

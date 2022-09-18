@@ -18,7 +18,6 @@ jobs:
 
     steps:
       - name: create-svg-commits
-        if: ${{ startsWith('skippingForNow', 'yes') }}
         uses: lowlighter/metrics@latest
         with:
           filename: ${{ env.COMMIT_CALENDAR_FILE }}
@@ -29,7 +28,6 @@ jobs:
           token: ${{secrets.COMMIT_METRICS_SECRET}}
 
       - name: create-svg-languages
-        if: ${{ startsWith('skippingForNow', 'yes') }}
         uses: lowlighter/metrics@latest
         with:
           filename: ${{ env.LANGUAGES_FILE }}
@@ -45,11 +43,9 @@ jobs:
           fetch-depth: 0
 
       - name: script-execution-permissions
-        if: ${{ startsWith('skippingForNow', 'yes') }}
         run: chmod +x ${{env.ORCHESTRATION_SCRIPT}}
 
       - name: persist-image-artifacts
-        if: ${{ startsWith('skippingForNow', 'yes') }}
         shell: bash
         env: 
           AWS_ACCESS_KEY_ID: ${{secrets.PERSISTANT_STORAGE_ID}}
