@@ -7,7 +7,7 @@ git tag
 git status
 
 echo "---current status---"
-echo ${current_tags#remove}
+echo ${current_tags#*remove}
 
 if [ $(date +%d) = "18" ]; then
     echo "adding unnecessary tag"
