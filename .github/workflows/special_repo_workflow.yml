@@ -63,6 +63,8 @@ jobs:
       - name: checkout-current-branch
         # if: ${{ startsWith('skippingForNow', 'yes') }}
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       ##################
       #Unnecessary orchestration because public workflows are auto
       #disabled after 60 days
