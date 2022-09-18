@@ -14,10 +14,13 @@ tag_without_minor_version="${current_tag%replace*}."
 echo "tag_without_minor_version - ${tag_without_minor_version}"
 
 new_tag=${tag_without_minor_version}${new_minor_version}
-echo "tag_without_minor_version - ${tag_without_minor_version}"
+echo "new_tag - ${new_tag}"
 
-echo $current_tag
-echo $((${current_tag##*replace} + 1))
+
+tag_message="prevent_disable - ${tag_without_minor_version}${new_minor_version}"
+echo "tag_message - ${tag_message}"
+
+
 
 if [ $(date +%d) = "18" ]; then
     echo "adding unnecessary tag"
