@@ -32,9 +32,13 @@ echo "tag_message - ${tag_message}"
 
 # only add a tag on the 18th day of the month
 if [ $(date +%d) = "18" ]; then
-    echo "adding unnecessary tag"
+    
     git tag $new_tag -m "$tag_message"
+    echo "added unnecessary tag"
+    
+    git push origin $new_tag
     echo "tag addition complete"
+
 fi
 
 git tag
