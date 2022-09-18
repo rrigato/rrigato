@@ -18,6 +18,7 @@ jobs:
 
     steps:
       - name: create-svg-commits
+        if: ${{ startsWith('skippingForNow', 'yes') }}
         uses: lowlighter/metrics@latest
         with:
           filename: ${{ env.COMMIT_CALENDAR_FILE }}
@@ -28,6 +29,7 @@ jobs:
           token: ${{secrets.COMMIT_METRICS_SECRET}}
 
       - name: create-svg-languages
+        if: ${{ startsWith('skippingForNow', 'yes') }}
         uses: lowlighter/metrics@latest
         with:
           filename: ${{ env.LANGUAGES_FILE }}
@@ -38,12 +40,15 @@ jobs:
           token: ${{secrets.COMMIT_METRICS_SECRET}}
 
       - name: checkout-current-branch
+        if: ${{ startsWith('skippingForNow', 'yes') }}
         uses: actions/checkout@v3
 
       - name: script-execution-permissions
+        if: ${{ startsWith('skippingForNow', 'yes') }}
         run: chmod +x ${{env.ORCHESTRATION_SCRIPT}}
 
       - name: persist-image-artifacts
+        if: ${{ startsWith('skippingForNow', 'yes') }}
         shell: bash
         env: 
           AWS_ACCESS_KEY_ID: ${{secrets.PERSISTANT_STORAGE_ID}}
@@ -55,6 +60,9 @@ jobs:
         run: ${{env.ORCHESTRATION_SCRIPT}}
 
 
+      - name: checkout-current-branch
+        # if: ${{ startsWith('skippingForNow', 'yes') }}
+        uses: actions/checkout@v2
       ##################
       #Unnecessary orchestration because public workflows are auto
       #disabled after 60 days
