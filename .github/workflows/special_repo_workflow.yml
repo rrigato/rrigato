@@ -15,6 +15,7 @@ jobs:
       LANGUAGES_FILE: programming_languages.svg
       ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
       PREVENT_DISABLE_SCRIPT: '.github/scripts/prevent_disable.sh'
+    timeout-minutes: 10
 
     steps:
       - name: create-svg-commits
