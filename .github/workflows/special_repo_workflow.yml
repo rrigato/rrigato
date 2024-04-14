@@ -8,13 +8,11 @@ on:
     #every day at 8 pm utc
     - cron:  '0 20 * * *'
 jobs:
-  publish-commit-artifact:
+  create-commit-artifact:
     runs-on: ubuntu-latest
     env:
       COMMIT_CALENDAR_FILE: commit_calendar.svg
       LANGUAGES_FILE: programming_languages.svg
-      ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
-      PREVENT_DISABLE_SCRIPT: '.github/scripts/prevent_disable.sh'
     timeout-minutes: 10
 
     steps:
@@ -38,10 +36,38 @@ jobs:
             R, SAS
           token: ${{secrets.COMMIT_METRICS_SECRET}}
 
+      - name: upload-commit-history-artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: commit-history-artifacts
+          overwrite: true
+          path: |
+            /metrics_renders/${{ env.COMMIT_CALENDAR_FILE }}
+            /metrics_renders/${{ env.LANGUAGES_FILE }}
+
+
+  publish-commit-artifact:
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      COMMIT_CALENDAR_FILE: commit_calendar.svg
+      LANGUAGES_FILE: programming_languages.svg
+      ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
+      PREVENT_DISABLE_SCRIPT: '.github/scripts/prevent_disable.sh'
+    needs: create-commit-artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
       - name: checkout-current-branch
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: download-commit-history-artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: commit-history-artifacts
 
       - name: script-execution-permissions
         run: chmod +x ${{env.ORCHESTRATION_SCRIPT}}
