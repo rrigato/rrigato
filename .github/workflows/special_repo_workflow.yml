@@ -46,15 +46,21 @@ jobs:
       - name: script-execution-permissions
         run: chmod +x ${{env.ORCHESTRATION_SCRIPT}}
 
+
+      - name: assume-github-actions-role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          audience: sts.amazonaws.com
+          aws-region: ${{vars.REGION_NAME}}
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/${{secrets.PIPELINE_ROLE_NAME}}
+
       - name: persist-image-artifacts
         shell: bash
         env:
-          AWS_ACCESS_KEY_ID: ${{secrets.PERSISTANT_STORAGE_ID}}
           AWS_DEFAULT_OUTPUT: json
-          AWS_DEFAULT_REGION: 'us-east-1'
+          AWS_DEFAULT_REGION: ${{vars.REGION_NAME}}
           AWS_S3_BUCKET_NAME: 'ryanrigato.com'
           AWS_S3_UPLOAD_PREFIX: 'github/'
-          AWS_SECRET_ACCESS_KEY: ${{secrets.PERSISTANT_STORAGE_KEY}}
         run: ${{env.ORCHESTRATION_SCRIPT}}
 
 
@@ -70,5 +76,3 @@ jobs:
       - name: prevent-disabled-workflow
         shell: bash
         run: ${{env.PREVENT_DISABLE_SCRIPT}}
-
-
