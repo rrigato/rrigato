@@ -8,7 +8,7 @@ on:
     #every day at 8 pm utc
     - cron:  '0 20 * * *'
 jobs:
-  publish-commit-artifact:
+  create-commit-artifact:
     runs-on: ubuntu-latest
     env:
       COMMIT_CALENDAR_FILE: commit_calendar.svg
@@ -38,6 +38,19 @@ jobs:
             R, SAS
           token: ${{secrets.COMMIT_METRICS_SECRET}}
 
+  publish-commit-artifact:
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      COMMIT_CALENDAR_FILE: commit_calendar.svg
+      LANGUAGES_FILE: programming_languages.svg
+      ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
+      PREVENT_DISABLE_SCRIPT: '.github/scripts/prevent_disable.sh'
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
       - name: checkout-current-branch
         uses: actions/checkout@v3
         with:
