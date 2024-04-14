@@ -47,6 +47,7 @@ jobs:
             ${{ env.COMMIT_CALENDAR_FILE }}
             ${{ env.LANGUAGES_FILE }}
 
+
   publish-commit-artifact:
     permissions:
       contents: read
@@ -56,7 +57,7 @@ jobs:
       LANGUAGES_FILE: programming_languages.svg
       ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
       PREVENT_DISABLE_SCRIPT: '.github/scripts/prevent_disable.sh'
-
+    needs: create-commit-artifact
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -65,7 +66,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Download artifacts
+      - name: download-artifacts
         uses: actions/download-artifact@v4
         with:
           name: commit-history-artifacts
