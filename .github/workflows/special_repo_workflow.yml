@@ -72,3 +72,13 @@ jobs:
         run: ${{env.PREVENT_DISABLE_SCRIPT}}
 
 
+      - name: assume-github-actions-role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          audience: sts.amazonaws.com
+          aws-region: ${{vars.REGION_NAME}}
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/${{secrets.PIPELINE_ROLE_NAME}}
+
+      - name: validate-permissions
+        run: |
+          aws sts get-caller-identity
