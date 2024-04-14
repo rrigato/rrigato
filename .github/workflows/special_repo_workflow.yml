@@ -44,8 +44,8 @@ jobs:
           name: commit-history-artifacts
           overwrite: true
           path: |
-            ${{ env.COMMIT_CALENDAR_FILE }}
-            ${{ env.LANGUAGES_FILE }}
+            /metrics_renders/${{ env.COMMIT_CALENDAR_FILE }}
+            /metrics_renders/${{ env.LANGUAGES_FILE }}
 
 
   publish-commit-artifact:
