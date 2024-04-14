@@ -1,1 +1,2 @@
+cfn-lint
 detect-secrets==1.4.0

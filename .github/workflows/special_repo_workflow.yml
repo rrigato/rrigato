@@ -1,6 +1,6 @@
 name: readme svg for special repo
-on: 
-  push: 
+on:
+  push:
     branches:
       - master
       - dev
@@ -10,7 +10,7 @@ on:
 jobs:
   publish-commit-artifact:
     runs-on: ubuntu-latest
-    env: 
+    env:
       COMMIT_CALENDAR_FILE: commit_calendar.svg
       LANGUAGES_FILE: programming_languages.svg
       ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
@@ -48,7 +48,7 @@ jobs:
 
       - name: persist-image-artifacts
         shell: bash
-        env: 
+        env:
           AWS_ACCESS_KEY_ID: ${{secrets.PERSISTANT_STORAGE_ID}}
           AWS_DEFAULT_OUTPUT: json
           AWS_DEFAULT_REGION: 'us-east-1'
@@ -57,7 +57,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.PERSISTANT_STORAGE_KEY}}
         run: ${{env.ORCHESTRATION_SCRIPT}}
 
-        
+
       ##################
       #Unnecessary orchestration because public workflows are auto
       #disabled after 60 days
@@ -70,4 +70,5 @@ jobs:
       - name: prevent-disabled-workflow
         shell: bash
         run: ${{env.PREVENT_DISABLE_SCRIPT}}
+
 
