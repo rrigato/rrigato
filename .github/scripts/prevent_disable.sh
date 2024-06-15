@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 #setup git config
 git config user.name "github_action_bot"
 git config user.email "no_email_address"
@@ -30,8 +32,8 @@ tag_message="prevent_disable - ${tag_without_minor_version}${new_minor_version}"
 echo "tag_message - ${tag_message}"
 
 
-# only add a tag on the 18th day of the month
-if [ $(date +%d) = "18" ]; then
+# only add a tag on the 9th day of the month
+if [ $(date +%d) = "09" ]; then
 
     git tag $new_tag -m "$tag_message"
     echo "added unnecessary tag"
