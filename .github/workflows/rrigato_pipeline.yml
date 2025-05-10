@@ -54,13 +54,12 @@ jobs:
       COMMIT_CALENDAR_FILE: commit_calendar.svg
       LANGUAGES_FILE: programming_languages.svg
       ORCHESTRATION_SCRIPT: './.github/scripts/orchestrate_artifacts.sh'
-      PREVENT_DISABLE_SCRIPT: '.github/scripts/prevent_disable.sh'
     needs: create-commit-artifact
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: checkout-current-branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -96,9 +95,6 @@ jobs:
       #
       #https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow
       ##################
-      - name: script-execution-permissions-disable
-        run: chmod +x ${{env.PREVENT_DISABLE_SCRIPT}}
-
       - name: prevent-disabled-workflow
         shell: bash
-        run: ${{env.PREVENT_DISABLE_SCRIPT}}
+        run: .github/scripts/prevent_disable.sh
